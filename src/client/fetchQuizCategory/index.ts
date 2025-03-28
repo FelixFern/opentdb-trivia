@@ -1,4 +1,5 @@
 import { FETCH_QUIZ_CATEGORY } from "@/constants/api";
+import type { TFetchQuizCategoryResponse } from "./types";
 
 export const fetchQuizCategory = async () => {
   try {
@@ -8,6 +9,8 @@ export const fetchQuizCategory = async () => {
 
     const json = await res.json();
 
-    return json;
-  } catch (err) {}
+    return json as TFetchQuizCategoryResponse;
+  } catch (err) {
+    throw new Error("Error: failed to fetch quiz category");
+  }
 };
