@@ -5,7 +5,7 @@ import type { TFetchQuizParams } from "./types";
 export const fetchQuiz = async (params: TFetchQuizParams) => {
   try {
     const normalizedParams = encodeURIComponent(
-      new URLSearchParams(params).toString()
+      new URLSearchParams({ ...params, amount: (params.amount ?? '').toString() }).toString()
     );
     const res = await fetch(`${FETCH_QUIZ}?${normalizedParams}`, {
       method: "GET",
