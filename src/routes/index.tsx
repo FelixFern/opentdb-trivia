@@ -7,14 +7,13 @@ export const Route = createFileRoute("/")({
 });
 
 
-function HomePage() {
+export function HomePage() {
   const { quizConfiguration, isSubmitButtonEnabled, handleUpdateConfiguration, handleStartQuiz } = useHomePage()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 space-y-6">
         <h1 className="text-3xl font-bold text-indigo-800 text-center">Open Trivia DB Quiz</h1>
-
         <QuizConfiguration quizConfiguration={quizConfiguration} handleUpdateConfiguration={handleUpdateConfiguration} />
         <button
           disabled={!isSubmitButtonEnabled}
