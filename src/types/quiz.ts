@@ -9,6 +9,12 @@ export enum QuizType {
   Multiple = "multiple",
 }
 
+export enum QuizStatus {
+  Correct = "correct",
+  Incorrect = "incorrect",
+  Complete = "complete"
+}
+
 export type TQuizData = {
   type: string;
   difficulty: string;

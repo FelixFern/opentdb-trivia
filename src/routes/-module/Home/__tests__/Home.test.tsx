@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 import { HomePage } from "../../../index";
 import { useHomePage } from "../useHomePage";
 
@@ -22,7 +22,7 @@ const setup = (overrides = {}) => {
     handleStartQuiz: vi.fn(),
   };
   const mockValues = { ...defaultValues, ...overrides };
-  useHomePage.mockReturnValue(mockValues);
+  (useHomePage as Mock).mockReturnValue(mockValues);
   return mockValues;
 };
 
