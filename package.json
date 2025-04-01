@@ -9,7 +9,7 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage && open coverage/index.html",
     "lint": "eslint",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.17",
