@@ -4,10 +4,11 @@ import { QuizPage } from "@/routes/quiz";
 import { decodeHtmlEntities } from "@/util/decodeHtmlEntities";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 
 const mockNavigate = vi.fn()
+const mockLocalStorageSetItem = vi.fn()
 
 vi.mock('@tanstack/react-router', () => ({
   ...vi.importActual('@tanstack/react-router'),
@@ -38,6 +39,14 @@ describe("QuizPage test", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     (useNavigate as Mock).mockReturnValue(mockNavigate)
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        setItem: mockLocalStorageSetItem,
+        getItem: vi.fn(),
+        removeItem: vi.fn(),
+        clear: vi.fn(),
+      },
+    })
   });
 
   it("renders pages correctly if fetchQuiz success with quiz not empty", async () => {
@@ -89,6 +98,21 @@ describe("QuizPage test", () => {
       expect(screen.getByText(`Sorry, it seems like there is an error when the quiz is fetching, please kindly retry or go back to the selection page`)).toBeDefined();
     })
   });
+
+  it('clicking the audio button should toggle the sound', () => {
+    setupMockFetchQuiz();
+    render(<QuizPage />, { wrapper: QueryClientWrapper });
+
+
+    expect(screen.getByTestId("icon-sound-disabled")).toBeDefined();
+
+    const toggleSoundButton = screen.getByTestId('button-toggle-sound')
+
+    fireEvent.click(toggleSoundButton)
+
+    expect(screen.getByTestId("icon-sound-enabled")).toBeDefined();
+    expect(mockLocalStorageSetItem).toBeCalledWith('soundEnabled', 'true')
+  })
 
   //! NOTE: Revisit
   // it('should trigger the right action on select option', async () => {

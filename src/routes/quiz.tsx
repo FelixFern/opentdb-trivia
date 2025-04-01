@@ -33,6 +33,7 @@ export function QuizPage() {
         <button
           onClick={handleToggleSound}
           className="p-2 rounded-full hover:bg-indigo-100 transition"
+          data-testid="button-toggle-sound"
         >
           {isSoundEnabled ? (
             <Volume2 className="text-indigo-600" data-testid="icon-sound-enabled" />
