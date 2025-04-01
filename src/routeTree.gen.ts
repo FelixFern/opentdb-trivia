@@ -12,7 +12,6 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as QuizImport } from './routes/quiz'
-import { Route as LeaderboardImport } from './routes/leaderboard'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -20,12 +19,6 @@ import { Route as IndexImport } from './routes/index'
 const QuizRoute = QuizImport.update({
   id: '/quiz',
   path: '/quiz',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LeaderboardRoute = LeaderboardImport.update({
-  id: '/leaderboard',
-  path: '/leaderboard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,13 +39,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/leaderboard': {
-      id: '/leaderboard'
-      path: '/leaderboard'
-      fullPath: '/leaderboard'
-      preLoaderRoute: typeof LeaderboardImport
-      parentRoute: typeof rootRoute
-    }
     '/quiz': {
       id: '/quiz'
       path: '/quiz'
@@ -67,41 +53,36 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/leaderboard': typeof LeaderboardRoute
   '/quiz': typeof QuizRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/leaderboard': typeof LeaderboardRoute
   '/quiz': typeof QuizRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/leaderboard': typeof LeaderboardRoute
   '/quiz': typeof QuizRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/leaderboard' | '/quiz'
+  fullPaths: '/' | '/quiz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/leaderboard' | '/quiz'
-  id: '__root__' | '/' | '/leaderboard' | '/quiz'
+  to: '/' | '/quiz'
+  id: '__root__' | '/' | '/quiz'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LeaderboardRoute: typeof LeaderboardRoute
   QuizRoute: typeof QuizRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LeaderboardRoute: LeaderboardRoute,
   QuizRoute: QuizRoute,
 }
 
@@ -116,15 +97,11 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/leaderboard",
         "/quiz"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/leaderboard": {
-      "filePath": "leaderboard.tsx"
     },
     "/quiz": {
       "filePath": "quiz.tsx"

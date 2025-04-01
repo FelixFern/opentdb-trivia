@@ -13,6 +13,15 @@ export default defineConfig({
     environment: "jsdom",
     coverage: {
       provider: 'v8',
+      ignoreEmptyLines: true,
+      exclude: [
+        "src/main.tsx",
+        "src/reportWebVitals.ts",
+        "src/routeTree.gen.ts",
+        "src/routes/__root.tsx",
+        "vite.config.js",
+        "**/types/**"
+      ]
     }
   },
   resolve: {

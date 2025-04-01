@@ -1,11 +1,11 @@
+import type { TFetchQuizParams } from "@/client/fetchQuiz/types"
 import { DIFFICULTY_OPTIONS, TYPE_OPTIONS } from "@/constants/options"
 import { useQuizCategoryData } from "@/hooks/useQuizCategoryData"
 import { Loader } from "lucide-react"
-import type { TQuizConfigurationState } from "../useHomePage"
 
 type TQuizConfigurationProps = {
-  quizConfiguration: TQuizConfigurationState
-  handleUpdateConfiguration: <K extends keyof TQuizConfigurationState>(key: K, value: TQuizConfigurationState[K]) => void
+  quizConfiguration: TFetchQuizParams
+  handleUpdateConfiguration: <K extends keyof TFetchQuizParams>(key: K, value: TFetchQuizParams[K]) => void
 }
 
 const QuizConfiguration = ({ quizConfiguration, handleUpdateConfiguration }: TQuizConfigurationProps) => {
@@ -13,18 +13,6 @@ const QuizConfiguration = ({ quizConfiguration, handleUpdateConfiguration }: TQu
 
   return (
     <>
-      <div>
-        <label className="block text-indigo-700 font-semibold mb-2">
-          Name (optional)
-        </label>
-        <input
-          type="text"
-          placeholder="Name"
-          value={quizConfiguration.name}
-          onChange={(e) => handleUpdateConfiguration('name', e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-      </div>
       <div>
         <label className="block text-indigo-700 font-semibold mb-2">
           Number of Questions

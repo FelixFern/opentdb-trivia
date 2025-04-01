@@ -2,15 +2,11 @@ import type { TFetchQuizParams } from "@/client/fetchQuiz/types"
 import { useNavigate } from "@tanstack/react-router"
 import { useMemo, useState } from "react"
 
-export type TQuizConfigurationState = {
-  name?: string
-} & TFetchQuizParams
 
-const optionalFields: (keyof TQuizConfigurationState)[] = ['name', 'category']
+const optionalFields: (keyof TFetchQuizParams)[] = ['category']
 
 export const useHomePage = () => {
-  const [quizConfiguration, setQuizConfiguration] = useState<TQuizConfigurationState>({
-    name: undefined,
+  const [quizConfiguration, setQuizConfiguration] = useState<TFetchQuizParams>({
     amount: 5,
     category: undefined,
     difficulty: undefined,
@@ -18,7 +14,7 @@ export const useHomePage = () => {
   })
   const navigate = useNavigate()
 
-  const handleUpdateConfiguration = <K extends keyof TQuizConfigurationState>(key: K, value: TQuizConfigurationState[K]) => {
+  const handleUpdateConfiguration = <K extends keyof TFetchQuizParams>(key: K, value: TFetchQuizParams[K]) => {
     setQuizConfiguration((conf) => ({ ...conf, [key]: value }))
   }
 

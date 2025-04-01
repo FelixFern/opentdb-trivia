@@ -1,7 +1,7 @@
+import type { TFetchQuizParams } from "@/client/fetchQuiz/types";
 import { ResponseStatus } from "@/types/common";
 import { createFileRoute } from "@tanstack/react-router";
 import { Loader, Volume2, VolumeX } from "lucide-react";
-import type { TQuizConfigurationState } from "./-module/Home/useHomePage";
 import FinishedView from "./-module/Quiz/components/FinishedView";
 import { QuestionView } from "./-module/Quiz/components/QuestionView";
 import QuizError from "./-module/Quiz/components/QuizError";
@@ -10,7 +10,7 @@ import { useQuizPage } from "./-module/Quiz/useQuizPage";
 
 export const Route = createFileRoute("/quiz")({
   component: QuizPage,
-  validateSearch: (search: TQuizConfigurationState) => search
+  validateSearch: (search: TFetchQuizParams) => search
 });
 
 function QuizPage() {
