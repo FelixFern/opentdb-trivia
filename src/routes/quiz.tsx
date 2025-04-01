@@ -13,7 +13,7 @@ export const Route = createFileRoute("/quiz")({
   validateSearch: (search: TFetchQuizParams) => search
 });
 
-function QuizPage() {
+export function QuizPage() {
   const hooks = useQuizPage();
   const {
     quizStatus,
@@ -35,15 +35,15 @@ function QuizPage() {
           className="p-2 rounded-full hover:bg-indigo-100 transition"
         >
           {isSoundEnabled ? (
-            <Volume2 className="text-indigo-600" />
+            <Volume2 className="text-indigo-600" data-testid="icon-sound-enabled" />
           ) : (
-            <VolumeX className="text-gray-400" />
+            <VolumeX className="text-gray-400" data-testid="icon-sound-disabled" />
           )}
         </button>
       </div>
       {isQuizLoading ? (
         <div className="flex items-center gap-2">
-          <Loader className="animate-spin text-indigo-600" size={18} />
+          <Loader className="animate-spin text-indigo-600" size={18} data-testid='icon-loader-spinner' />
           <p>Loading Quiz...</p>
         </div>
       ) : (

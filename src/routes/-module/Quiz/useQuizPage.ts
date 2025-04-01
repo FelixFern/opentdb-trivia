@@ -1,6 +1,5 @@
 import * as Tone from "tone";
 
-
 import { useQuizData } from "@/hooks/useQuizData";
 import { QuizStatus, QuizType } from "@/types/quiz";
 import { useRouter, useSearch } from "@tanstack/react-router";
@@ -13,7 +12,6 @@ type TQuizStatusState = {
   selectedAnswer: string | null
 }
 
-
 export const useQuizPage = () => {
   const router = useRouter()
   const params = useSearch({
@@ -21,10 +19,10 @@ export const useQuizPage = () => {
   })
 
   const { data: quizData, refetch: handleRefetchQuiz, isFetching: isQuizLoading, isError: isQuizError } = useQuizData({
-    amount: params.amount,
-    category: params.category,
-    difficulty: params.difficulty,
-    type: params.type as QuizType
+    amount: params?.amount,
+    category: params?.category,
+    difficulty: params?.difficulty,
+    type: params?.type as QuizType
   })
 
   const [isSoundEnabled, setIsSoundEnabled] = useState(false)
@@ -46,7 +44,7 @@ export const useQuizPage = () => {
     return quizResult?.map((quiz) => (
       {
         ...quiz,
-        answer: [quiz.correct_answer, ...quiz.incorrect_answers].sort(() => params.type === QuizType.TrueFalse ? 1 : Math.random() - 0.5)
+        answer: [quiz.correct_answer, ...quiz.incorrect_answers].sort(() => params?.type === QuizType.TrueFalse ? 1 : Math.random() - 0.5)
       }
     ))
   }, [quizData?.results, isQuizLoading])
@@ -100,6 +98,7 @@ export const useQuizPage = () => {
     }
 
     setTimeout(() => {
+      console.log("CALLEd")
       if (quizStatus.currentQuestion + 1 < (normalizeQuiz ?? []).length) {
         setQuizStatus((p) => ({ ...p, currentQuestion: p.currentQuestion + 1, selectedAnswer: null }))
       } else {

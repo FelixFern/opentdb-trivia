@@ -23,6 +23,7 @@ const QuizConfiguration = ({ quizConfiguration, handleUpdateConfiguration }: TQu
           value={quizConfiguration.amount}
           onChange={(e) => handleUpdateConfiguration('amount', Number(e.target.value))}
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="Number of Questions"
         />
       </div>
       <div>

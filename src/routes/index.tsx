@@ -6,7 +6,6 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-
 export function HomePage() {
   const { quizConfiguration, isSubmitButtonEnabled, handleUpdateConfiguration, handleStartQuiz } = useHomePage()
 

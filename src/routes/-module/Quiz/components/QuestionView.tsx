@@ -1,14 +1,9 @@
 import { QuizStatus } from "@/types/quiz";
+import { decodeHtmlEntities } from '@/util/decodeHtmlEntities';
 import { CheckCircle, XCircle } from "lucide-react";
 import type { useQuizPage } from "../useQuizPage";
 
 export const QuestionView = ({ quizStatus, normalizeQuiz, currentQuestion, handleAnswerClick, getAnswerStatus, }: ReturnType<typeof useQuizPage>) => {
-  const decodeHtmlEntities = (text: string) => {
-    const parser = new DOMParser();
-    const decoded = parser.parseFromString(text, "text/html").body.textContent;
-    return decoded || "";
-  };
-
   return (
     <>
       <div className="mb-6">
@@ -40,8 +35,8 @@ export const QuestionView = ({ quizStatus, normalizeQuiz, currentQuestion, handl
             disabled={quizStatus.selectedAnswer !== null}
           >
             {decodeHtmlEntities(option)}
-            {getAnswerStatus(option) === QuizStatus.Correct && <CheckCircle className="inline ml-2" size={20} />}
-            {getAnswerStatus(option) === QuizStatus.Incorrect && <XCircle className="inline ml-2" size={20} />}
+            {getAnswerStatus(option) === QuizStatus.Correct && <CheckCircle className="inline ml-2" size={20} data-testid="icon-correct-answer" />}
+            {getAnswerStatus(option) === QuizStatus.Incorrect && <XCircle className="inline ml-2" size={20} data-testid="icon-wrong-answer" />}
           </button>
         ))}
       </div>

@@ -10,6 +10,7 @@ export const fetchQuiz = async (params: TFetchQuizParams) => {
         )
       )
     ).toString();
+
     const res = await fetch(`${FETCH_QUIZ}?${normalizedParams}`, {
       method: "GET",
     });
