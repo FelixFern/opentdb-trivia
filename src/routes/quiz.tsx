@@ -13,6 +13,7 @@ export const Route = createFileRoute("/quiz")({
   validateSearch: (search: TFetchQuizParams) => search
 });
 
+
 export function QuizPage() {
   const hooks = useQuizPage();
   const {
