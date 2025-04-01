@@ -26,7 +26,7 @@ export const useHomePage = () => {
   }
 
   const isSubmitButtonEnabled = useMemo(() =>
-    Object.entries(quizConfiguration).filter(([key, _]) => !(optionalFields as string[]).includes(key)).every(([_, val]) => !!val), [quizConfiguration])
+    Object.entries(quizConfiguration).filter(([key]) => !(optionalFields as string[]).includes(key)).every(([, val]) => !!val), [quizConfiguration])
 
   return {
     quizConfiguration,

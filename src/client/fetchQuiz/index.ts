@@ -6,7 +6,7 @@ export const fetchQuiz = async (params: TFetchQuizParams) => {
     const normalizedParams = new URLSearchParams(
       Object.fromEntries(
         Object.entries({ ...params, amount: (params.amount ?? "").toString() }).filter(
-          ([_, v]) => !!v
+          ([, v]) => !!v
         )
       )
     ).toString();
@@ -18,7 +18,7 @@ export const fetchQuiz = async (params: TFetchQuizParams) => {
     const json = await res.json();
 
     return json as TFetchQuizResponse;
-  } catch (err) {
+  } catch {
     throw new Error("Error: failed to fetch quiz");
   }
 };

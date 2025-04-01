@@ -10,7 +10,7 @@ export const fetchQuizCategory = async () => {
     const json = await res.json();
 
     return json as TFetchQuizCategoryResponse;
-  } catch (err) {
+  } catch {
     throw new Error("Error: failed to fetch quiz category");
   }
 };
