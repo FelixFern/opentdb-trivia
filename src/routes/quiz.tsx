@@ -1,18 +1,17 @@
-import type { TFetchQuizParams } from "@/client/fetchQuiz/types";
-import { ResponseStatus } from "@/types/common";
-import { createFileRoute } from "@tanstack/react-router";
-import { Loader, Volume2, VolumeX } from "lucide-react";
-import FinishedView from "./-module/Quiz/components/FinishedView";
-import { QuestionView } from "./-module/Quiz/components/QuestionView";
-import QuizError from "./-module/Quiz/components/QuizError";
-import QuizNotFound from "./-module/Quiz/components/QuizNotFound";
-import { useQuizPage } from "./-module/Quiz/useQuizPage";
+import type { TFetchQuizParams } from '@/client/fetchQuiz/types';
+import { ResponseStatus } from '@/types/common';
+import { createFileRoute } from '@tanstack/react-router';
+import { Loader, Volume2, VolumeX } from 'lucide-react';
+import FinishedView from './-module/Quiz/components/FinishedView';
+import { QuestionView } from './-module/Quiz/components/QuestionView';
+import QuizError from './-module/Quiz/components/QuizError';
+import QuizNotFound from './-module/Quiz/components/QuizNotFound';
+import { useQuizPage } from './-module/Quiz/useQuizPage';
 
-export const Route = createFileRoute("/quiz")({
+export const Route = createFileRoute('/quiz')({
   component: QuizPage,
-  validateSearch: (search: TFetchQuizParams) => search
+  validateSearch: (search: TFetchQuizParams) => search,
 });
-
 
 export function QuizPage() {
   const hooks = useQuizPage();
@@ -25,7 +24,7 @@ export function QuizPage() {
     isQuizError,
     handleFinishQuiz,
     handleToggleSound,
-    handleRefetchQuiz
+    handleRefetchQuiz,
   } = hooks;
 
   return (
@@ -45,14 +44,12 @@ export function QuizPage() {
       </div>
       {isQuizLoading ? (
         <div className="flex items-center gap-2">
-          <Loader className="animate-spin text-indigo-600" size={18} data-testid='icon-loader-spinner' />
+          <Loader className="animate-spin text-indigo-600" size={18} data-testid="icon-loader-spinner" />
           <p>Loading Quiz...</p>
         </div>
       ) : (
         <>
-          {(quizResponseStatus === ResponseStatus.NotFound || normalizeQuiz?.length === 0) && (
-            <QuizNotFound />
-          )}
+          {(quizResponseStatus === ResponseStatus.NotFound || normalizeQuiz?.length === 0) && <QuizNotFound />}
           {(quizResponseStatus === ResponseStatus.Error || isQuizError) && (
             <QuizError handleRefetchQuiz={handleRefetchQuiz} />
           )}

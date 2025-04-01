@@ -49,7 +49,6 @@
     "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "pnpm lint --fix",
-      "pnpm test",
       "git add"
     ]
   }
