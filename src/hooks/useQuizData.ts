@@ -5,14 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 export const useQuizData = (params: TFetchQuizParams) => {
   return useQuery({
     queryKey: ["quiz"],
-    queryFn: async () => {
-      try {
-        const res = await fetchQuiz(params)
-        return res
-      } catch (err) {
-        throw new Error("Failed to fetch quiz data")
-      }
-    },
+    queryFn: async () => await fetchQuiz(params),
     refetchOnWindowFocus: false,
   });
 };
