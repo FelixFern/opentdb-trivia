@@ -252,7 +252,7 @@ Examples of mocked dependencies include:
 
 ## Extra Features
 
-This project is equipped with pre-commit hooks that enable eslint, prettier check and unit testing run before user is allowed to commit to the branch
+This project is equipped with pre-commit hooks powered by Husky and lint-staged that enable eslint, prettier check and unit testing run before user is allowed to commit to the branch
 
 ### Eslint Configuration
 
