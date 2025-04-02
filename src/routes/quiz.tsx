@@ -27,6 +27,8 @@ export function QuizPage() {
     handleRefetchQuiz,
   } = hooks;
 
+  console.log(quizResponseStatus, quizStatus);
+
   return (
     <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 text-center relative">
       <div className="absolute top-4 right-4">

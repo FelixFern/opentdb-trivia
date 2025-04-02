@@ -194,8 +194,6 @@ describe('QuizPage test', () => {
     expect(screen.getByText('Quiz Completed!')).toBeDefined();
 
     expect(mockTriggerAttackRelease).toHaveBeenCalledWith('C5', '4n');
-    expect(mockTriggerAttackRelease).toHaveBeenCalledWith('E5', '4n');
-    expect(mockTriggerAttackRelease).toHaveBeenCalledWith('G5', '4n');
 
     expect(screen.getByText('3 / 5')).toBeDefined();
 

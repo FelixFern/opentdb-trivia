@@ -75,8 +75,6 @@ export const useQuizPage = () => {
         break;
       case QuizStatus.Complete:
         quizCompleteSound.triggerAttackRelease('C5', '4n');
-        quizCompleteSound.triggerAttackRelease('E5', '4n');
-        quizCompleteSound.triggerAttackRelease('G5', '4n');
         break;
     }
   };
