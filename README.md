@@ -252,7 +252,8 @@ Examples of mocked dependencies include:
 
 ## Extra Features
 
-This project is equipped with pre-commit hooks powered by Husky and lint-staged that enable eslint, prettier check and unit testing run before user is allowed to commit to the branch
+- Toggleable audio powered by tone.js with persistent state value using local browser storage.
+- This project is equipped with pre-commit hooks powered by Husky and lint-staged that enables eslint, Prettier check and unit testing to run before the user is allowed to commit to the branch
 
 ### Eslint Configuration
 
