@@ -1,291 +1,277 @@
-Welcome to your new TanStack app! 
+# Open Trivia DB App
 
-# Getting Started
+Simple interactive web-based trivia game powered by the Open Trivia Database API.
 
-To run this application:
+## Features
+
+- **Dynamic Quiz Experience**: Answer questions one at a time with immediate feedback
+- **Customizable Quizzes**: Select from multiple categories and difficulty levels
+- **Score Tracking**: Keep track of your performance as you progress
+- **Sound Effects**: Optional sound feedback for correct and incorrect answers
+- **Responsive Design**: Play on any device with a seamless experience
+
+## Demo
+
+[Live Demo](https://opentdb-trivia-smoky.vercel.app/)
+
+## Technologies Used
+
+- React 18
+- TypeScript
+- TanStack Router for navigation
+- TanStack Query for data fetching
+- Tone.js for sound effects
+- Tailwind CSS for styling
+- Vitest & React Testing Library for testing
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18.0.0 or higher)
+- npm or yarn or pnpm
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/trivia-game-app.git
+   cd trivia-game-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:3000`
+
+### Running Tests
+
+Run the test suite:
 
 ```bash
-pnpm install
-pnpm start  
-```
-
-# Building For Production
-
-To build this application for production:
-
-```bash
-pnpm build
-```
-
-## Testing
-
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
+npm run test
+# or
+yarn test
+# or
 pnpm test
 ```
 
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-
-
-
-## Routing
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add another a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-import { Link } from "@tanstack/react-router";
-
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/people",
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
-  },
-  component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
-  },
-});
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-### React-Query
-
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
-
-First add your dependencies:
+Run tests with coverage:
 
 ```bash
-pnpm add @tanstack/react-query @tanstack/react-query-devtools
+npm run test:coverage
+# or
+yarn test:coverage
+# or
+pnpm test:coverage
 ```
 
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
+## Usage
 
-```tsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+1. On the home page, configure your quiz:
 
-// ...
+   - Select a category (General Knowledge, Science, History, etc.)
+   - Choose difficulty level (Easy, Medium, Hard)
+   - Set the number of questions (1-50)
+   - Select question type (Multiple Choice or True/False)
 
-const queryClient = new QueryClient();
+2. Start the quiz by clicking the "Start Quiz" button
 
-// ...
+3. Answer each question by clicking on your chosen option
 
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
+   - Correct answers will be highlighted in green
+   - Incorrect answers will be highlighted in red
+   - The app will automatically progress to the next question after a brief delay
 
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-}
+4. At the end of the quiz, view your score and summary
+
+5. Choose to play again or return to the home screen to configure a new quiz
+
+## Project Structure
+
+```
+src/
+├── client/                     # API client functionality
+│   ├── fetchQuiz/              # Quiz fetching logic
+│   └── fetchQuizCategory/      # Category fetching logic
+├── constants/                  # Application constants
+│   ├── api.ts                  # API endpoints and config
+│   └── options.ts              # Quiz options and settings
+├── hooks/                      # Custom React hooks
+│   ├── useQuizCategoryData.ts  # Hook for fetching categories
+│   └── useQuizData.ts          # Hook for fetching quiz questions
+├── mock/                       # Testing mocks
+│   └── client/                 # API client mocks
+├── routes/                     # Application routes using TanStack Router
+│   ├── -module/                # Route-specific modules
+│   │   ├── Home/               # Home page components & logic
+│   │   │   ├── __tests__/      # Home page tests
+│   │   │   ├── components/     # Home page components
+│   │   │   └── useHomePage.ts  # Home page hook
+│   │   └── Quiz/               # Quiz page components & logic
+│   │       ├── __tests__/      # Quiz page tests
+│   │       ├── components/     # Quiz page components
+│   │       └── useQuizPage.ts  # Quiz page hook
+│   ├── root.tsx                # Root route component
+│   ├── index.tsx               # Main entry point for routes
+│   └── quiz.tsx                # Quiz route component
+└── types/                      # TypeScript type definitions
+└── util/                       # Utility functions
 ```
 
-You can also add TanStack Query Devtools to the root route (optional).
+## API Integration
 
-```tsx
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+This app uses the Open Trivia Database API:
 
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
-```
+- Base URL: `https://opentdb.com/api.php`
+- Parameters:
+  - `amount`: Number of questions (1-50)
+  - `category`: Question category ID
+  - `difficulty`: Question difficulty (easy, medium, hard)
+  - `type`: Question type (multiple, boolean)
 
-Now you can use `useQuery` to fetch your data.
+## Key Components
 
-```tsx
-import { useQuery } from "@tanstack/react-query";
+- **Home**: Landing page with quiz configuration options
+- **QuizConfiguration**: Component for selecting quiz parameters
+- **QuizPage**: Main quiz gameplay component
+- **QuestionView**: Displays individual questions and answer options
+- **FinishedView**: End-of-quiz summary showing final score
 
-import "./App.css";
+## Custom Hooks
 
-function App() {
-  const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
+- **useHomePage**: Manages home page state and quiz configuration
+- **useQuizPage**: Handles quiz state, question navigation, and scoring
+- **useQuizData**: Fetches quiz questions based on selected parameters
+- **useQuizCategoryData**: Retrieves available quiz categories
+
+## Testing Strategy
+
+The application uses Vitest and React Testing Library for comprehensive test coverage. The test suite includes:
+
+### HomePage Tests
+
+The HomePage tests verify that:
+
+1. The page renders correctly when category fetching is successful
+2. The page renders correctly when category fetching fails
+3. The "Start Quiz" button is properly disabled when configuration is incomplete
+4. The "Start Quiz" button becomes enabled and works correctly when all configurations are filled
+
+Key testing patterns:
+
+- Mocking API responses for category data
+- Verifying UI elements are displayed
+- Testing form interactions
+- Checking navigation occurs with correct parameters
+
+### QuizPage Tests
+
+The QuizPage tests verify that:
+
+1. The quiz page renders correctly when questions are fetched successfully
+2. The page shows appropriate UI when quiz data is empty
+3. The page shows error messages when quiz data fetching fails
+4. Sound toggle functionality works correctly
+5. Answer selection works properly, including:
+   - Correct/incorrect answer indication
+   - Sound feedback (when enabled)
+   - Timer-based progression to next question
+   - Final score calculation
+   - Navigation back to home
+
+Key testing patterns:
+
+- Mocking API responses for quiz questions
+- Testing loading states
+- Verifying error handling
+- Testing interactive features (sound toggle, answer selection)
+- Checking timing-dependent behavior using Vitest's timer mocking
+
+### Test Structure
+
+The tests follow a consistent structure:
+
+```javascript
+describe('Component test', () => {
+  beforeEach(() => {
+    // Setup: mock dependencies, reset state
   });
 
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-pnpm add @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
+  it('tests specific functionality', async () => {
+    // Arrange: setup test conditions
+    // Act: perform actions
+    // Assert: verify expected outcomes
+  });
 });
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
 ```
 
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
+Examples of mocked dependencies include:
 
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
+- API calls (fetchQuiz, fetchQuizCategory)
+- Navigation functions (useNavigate)
+- Browser APIs (localStorage)
+- External libraries (Tone.js for sound effects)
 
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
+## Extra Features
 
-# Demo files
+This project is equipped with pre-commit hooks that enable eslint, prettier check and unit testing run before user is allowed to commit to the branch
 
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
+### Eslint Configuration
 
-# Learn More
+```js
+export default defineConfig([
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], languageOptions: { globals: globals.browser } },
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], plugins: { js }, extends: ['js/recommended'] },
+  tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  {
+    rules: {
+      'react/jsx-uses-react': 'off',
+      'react/react-in-jsx-scope': 'off',
+    },
+  },
+  globalIgnores(['vite.config.js']),
+]);
+```
 
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-# opentdb-trivia
+### Prettier Configuration
+
+```json
+{
+  "trailingComma": "es5",
+  "printWidth": 120,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "arrowParens": "always"
+}
+```
+
+## Acknowledgements
+
+- [Open Trivia Database](https://opentdb.com/) for providing the free trivia API
+- [Lucide React](https://lucide.dev/) for the beautiful icons
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
+- [TanStack](https://tanstack.com/) for the excellent React libraries
