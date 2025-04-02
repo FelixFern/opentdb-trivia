@@ -10,9 +10,11 @@ Simple interactive web-based trivia game powered by the Open Trivia Database API
 - **Sound Effects**: Optional sound feedback for correct and incorrect answers
 - **Responsive Design**: Play on any device with a seamless experience
 
-## Demo
+## Demo - [Link](https://opentdb-trivia-smoky.vercel.app/)
+![image](https://github.com/user-attachments/assets/5f5ddf78-2df7-4431-b47f-80a03f40cf3d)
+![image](https://github.com/user-attachments/assets/ff803fa7-8379-4387-9266-95ec8ff51e1b)
+![image](https://github.com/user-attachments/assets/c205bc72-a27e-4f9c-b525-9aeea67334c2)
 
-[Live Demo](https://opentdb-trivia-smoky.vercel.app/)
 
 ## Technologies Used
 
@@ -231,6 +233,23 @@ Examples of mocked dependencies include:
 - Browser APIs (localStorage)
 - External libraries (Tone.js for sound effects)
 
+### Test Coverage
+99.69% Statements (661/663) || 95.68% Branches (111/116) || 97.5% Functions (39/40) || 99.69% Lines (661/663)
+| File                                  | Statements | Branches | Functions | Lines  |
+|---------------------------------------|------------|----------|-----------|--------|
+| client/fetchQuiz                      | 89.47% (17/19)  | 60% (3/5)  | 100% (2/2)  | 89.47% (17/19)  |
+| client/fetchQuizCategory              | 100% (12/12)  | 100% (3/3)  | 100% (2/2)  | 100% (12/12)  |
+| constants                             | 100% (28/28)  | 100% (0/0)  | 100% (0/0)  | 100% (28/28)  |
+| hooks                                 | 100% (17/17)  | 100% (3/3)  | 100% (3/3)  | 100% (17/17)  |
+| mock/client                           | 100% (214/214)  | 100% (14/14)  | 100% (9/9)  | 100% (214/214)  |
+| routes                                | 100% (77/77)  | 92.3% (12/13)  | 66.66% (2/3)  | 100% (77/77)  |
+| routes/-module/Home                   | 100% (29/29)  | 100% (7/7)  | 100% (3/3)  | 100% (29/29)  |
+| routes/-module/Home/components        | 100% (76/76)  | 100% (14/14)  | 100% (5/5)  | 100% (76/76)  |
+| routes/-module/Quiz                   | 100% (94/94)  | 94.44% (34/36)  | 100% (7/7)  | 100% (94/94)  |
+| routes/-module/Quiz/components        | 100% (92/92)  | 100% (19/19)  | 100% (5/5)  | 100% (92/92)  |
+| util                                  | 100% (5/5)  | 100% (2/2)  | 100% (1/1)  | 100% (5/5)  |
+
+
 ## Extra Features
 
 This project is equipped with pre-commit hooks that enable eslint, prettier check and unit testing run before user is allowed to commit to the branch
@@ -268,6 +287,7 @@ export default defineConfig([
   "arrowParens": "always"
 }
 ```
+
 
 ## Acknowledgements
 
